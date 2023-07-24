@@ -236,12 +236,6 @@ function App() {
       <br />
       <Table hover className="entries-wrapper">
         <tbody className="table-secondary">
-          {/* <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr> */}
           <tr>
             <th>#</th>
             <th>Name</th>
