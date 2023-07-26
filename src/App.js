@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../Assets/App.css";
+import "./Assets/App.css";
 import {
   Navbar,
   NavbarBrand,
@@ -16,6 +16,10 @@ import {
   Label,
   Table,
 } from "reactstrap";
+
+import { handleNewUser } from "./Methods/handleNewUser";
+import { handleUpdateUser } from "./Methods/handleUpdateUser";
+import { deleteTheUser } from "./Methods/deleteTheUser";
 
 function App() {
   const [name, setName] = useState("");
@@ -35,119 +39,9 @@ function App() {
   const toggle = () => setModal(!modal);
   const toggle2 = () => setEditUser(!editUser);
 
-  function generateRandomId() {
-    const characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    const idLength = 8;
-
-    while (true) {
-      let randomId = "";
-      for (let i = 0; i < idLength; i++) {
-        const randomIndex = Math.floor(Math.random() * characters.length);
-        randomId += characters.charAt(randomIndex);
-      }
-
-      // Check if the generated ID already exists in the list of existing IDs
-      if (!entries.some((entry) => entry.id === randomId)) {
-        return randomId; // Return the unique ID
-      }
-    }
-  }
-
-  const handleNewUser = async () => {
-    try {
-      const newUser = {
-        id: generateRandomId(),
-        name: name,
-        phone: phone,
-        address: address,
-      };
-      const res = await fetch("http://localhost:5000/entries", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(newUser),
-      });
-      const data = await res.json();
-      setEntries([...entries, data]);
-
-      setName("");
-      setPhone("");
-      setAddress("");
-      setModal(false);
-    } catch (error) {
-      console.error("Error in updating the existingEntries : ", error);
-    }
-  };
-
-  const handleUpdateEntry = (updateUser) => {
-    const index = entries.findIndex((entry) => entry.id === updateUser.id);
-    entries.splice(index, 1, updateUser);
-  };
-  const handleUpdateUser = async () => {
-    const updateUser = {
-      id: toBeUpdated.id,
-      name: name === "" ? toBeUpdated.name : name,
-      phone: phone === "" ? toBeUpdated.phone : phone,
-      address: address === "" ? toBeUpdated.address : address,
-    };
-    await fetch(`http://localhost:5000/entries/${updateUser.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(updateUser),
-    });
-    handleUpdateEntry(updateUser);
-    setName("");
-    setPhone("");
-    setAddress("");
-    setToBeUpdated({
-      id: "",
-      name: "",
-      phone: "",
-      address: "",
-    });
-    setEditUser(false);
-  };
   const editTheUser = (entry) => {
     toggle2();
     setToBeUpdated(entry);
-  };
-
-  // const deleteTheUser = async (id) => {
-  //   try {
-  //     await fetch(`http://localhost:5000/entries/${id}`, {
-  //       method: "DELETE",
-  //     });
-  //   } catch (error) {
-  //     console.error("Error occurred:", error);
-  //   }
-  //   const updatedEntries = entries.filter(
-  //     (entry, index) => entry.id !== index + 1
-  //   );
-  //   setEntries(updatedEntries);
-  // }
-  // NOTE : The issue with the deletion not working properly seems to be related to how the deleteTheUser function is handling the deletion process. The problem arises due to the asynchronous behavior of the setState function, which means that the entries state might not be updated instantly when you try to delete an entry.
-  // Sometimes the code could lead to inconsistent data if the server-side deletion fails or takes longer to respond.
-  // RACE CONDITION : When you perform the fetch to delete the entry, the setEntries function will be called immediately after the fetch, before the server responds. If the server takes some time to delete the entry or if the deletion fails, the frontend would have already removed the entry from the UI, but it might still exist in the backend. This leads to inconsistency between frontend and backend data.
-  const deleteTheUser = (id) => {
-    fetch(`http://localhost:5000/entries/${id}`, {
-      method: "DELETE",
-    })
-      .then(() => {
-        // After the delete request is successful, fetch the updated entries
-        return fetchEntries();
-      })
-      .then((updatedEntries) => {
-        // Update the state with the fetched updated entries
-        setEntries(updatedEntries);
-      })
-
-      .catch((error) => {
-        console.error("Error occurred:", error);
-      });
   };
 
   // Function to fetch entries from db.json
@@ -232,7 +126,23 @@ function App() {
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button type="submit" color="secondary" onClick={handleNewUser}>
+          <Button
+            type="submit"
+            color="secondary"
+            onClick={() =>
+              handleNewUser(
+                name,
+                phone,
+                address,
+                entries,
+                setEntries,
+                setName,
+                setPhone,
+                setAddress,
+                setModal
+              )
+            }
+          >
             Submit
           </Button>
         </ModalFooter>
@@ -263,7 +173,9 @@ function App() {
                     ></div>
                     <div
                       className="icon2"
-                      onClick={() => deleteTheUser(entry.id)}
+                      onClick={() =>
+                        deleteTheUser(entry.id, fetchEntries, setEntries)
+                      }
                     ></div>
                   </div>
                 </td>
@@ -314,7 +226,23 @@ function App() {
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button color="secondary" onClick={handleUpdateUser}>
+          <Button
+            color="secondary"
+            onClick={() =>
+              handleUpdateUser(
+                setEntries,
+                name,
+                phone,
+                address,
+                setName,
+                setPhone,
+                setAddress,
+                toBeUpdated,
+                setToBeUpdated,
+                setEditUser
+              )
+            }
+          >
             Save
           </Button>
         </ModalFooter>
