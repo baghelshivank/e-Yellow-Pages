@@ -31,12 +31,11 @@ function App() {
     phone: "",
     address: "",
   });
-  const [existingIds, setExistingIds] = useState([]);
 
   const toggle = () => setModal(!modal);
   const toggle2 = () => setEditUser(!editUser);
 
-  function generateRandomId(existingIds) {
+  function generateRandomId() {
     const characters =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     const idLength = 8;
@@ -49,7 +48,7 @@ function App() {
       }
 
       // Check if the generated ID already exists in the list of existing IDs
-      if (!existingIds.includes(randomId)) {
+      if (!entries.some((entry) => entry.id === randomId)) {
         return randomId; // Return the unique ID
       }
     }
@@ -57,9 +56,8 @@ function App() {
 
   const handleNewUser = async () => {
     try {
-      // const existingIds = await fetchExistingIds();
       const newUser = {
-        id: generateRandomId(existingIds),
+        id: generateRandomId(),
         name: name,
         phone: phone,
         address: address,
@@ -73,17 +71,6 @@ function App() {
       });
       const data = await res.json();
       setEntries([...entries, data]);
-
-      const res2 = await fetch("http://localhost:5000/existingIds", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({ id: data.id }),
-      });
-      const updateExistingIds = await res2.json();
-      setExistingIds([updateExistingIds]);
-      console.log(existingIds);
 
       setName("");
       setPhone("");
@@ -156,67 +143,11 @@ function App() {
       .then((updatedEntries) => {
         // Update the state with the fetched updated entries
         setEntries(updatedEntries);
+      })
 
-        // Now that the entries are updated, delete the user from existingIds
-        return fetch(`http://localhost:5000/existingIds/${id}`, {
-          method: "DELETE",
-        });
-      })
-      .then(() => {
-        // After the delete request is successful, fetch the updated existingIds
-        return fetchExistingIds();
-      })
-      .then((updatedExistingIds) => {
-        console.log("Hello Ids", updatedExistingIds);
-        // Update the state with the fetched updated existingIds
-        setExistingIds(updatedExistingIds);
-      })
       .catch((error) => {
         console.error("Error occurred:", error);
       });
-  };
-
-  // const deleteTheUser = (id) => {
-  //   // return new Promise((resolve) => {
-  //   //   const updatedEntries = [...entries];
-  //   //   updatedEntries.splice(index, 1);
-  //   //   resolve(updatedEntries);
-  //   // })
-  //   return new Promise((resolve, reject) => {
-  //     fetch(`http://localhost:5000/entries/${id}`, {
-  //       method: "DELETE",
-  //     })
-  //       .then(() => {
-  //         const updatedEntries = entries.filter(
-  //           (entry, index) => entry.id !== index + 1
-  //         );
-  //         resolve(updatedEntries); // Resolve the promise when the deletion is successful
-  //       })
-  //       .then((updatedEntries) => {
-  //         setEntries(updatedEntries);
-  //       })
-  //       .catch((error) => {
-  //         reject(error); // Reject the promise if there's an error during deletion
-  //       });
-  //   })
-  //     .then(() => {
-  //       console.log(entries);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error occurred:", error);
-  //     });
-  // };
-
-  // Function to fetch existingIds from db.json
-  const fetchExistingIds = async () => {
-    try {
-      const res = await fetch("http://localhost:5000/existingIds");
-      const data = await res.json();
-      return data;
-    } catch (error) {
-      console.log("Error fetching existingIds:", error);
-      return [];
-    }
   };
 
   // Function to fetch entries from db.json
@@ -232,19 +163,16 @@ function App() {
   };
 
   useEffect(() => {
-    const getEntriesAndExistingIds = async () => {
+    const getEntries = async () => {
       const entriesFromServer = await fetchEntries();
-      const existingIdsFromServer = await fetchExistingIds();
       setEntries(entriesFromServer);
-      setExistingIds(existingIdsFromServer);
     };
-    getEntriesAndExistingIds();
+    getEntries();
   }, []);
 
   useEffect(() => {
     console.log("Entries from useEffect", entries);
-    console.log("ExistingIds from useEffect", existingIds);
-  }, [entries, existingIds]);
+  }, [entries]);
 
   return (
     <div className="App">
