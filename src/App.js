@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Assets/App.css";
 import {
@@ -47,9 +48,9 @@ function App() {
   // Function to fetch entries from db.json
   const fetchEntries = async () => {
     try {
-      const res = await fetch("http://localhost:5000/entries");
-      const data = await res.json();
-      return data;
+      const res = await axios.get("http://localhost:5000/entries");
+      // const data = await res.json();
+      return res.data;
     } catch (error) {
       console.log("Error fetching entries:", error);
       return [];

@@ -1,3 +1,4 @@
+import axios from "axios";
 import { generateRandomId } from "./generateRandomId";
 export async function handleNewUser(
   name,
@@ -17,15 +18,18 @@ export async function handleNewUser(
       phone: phone,
       address: address,
     };
-    const res = await fetch("http://localhost:5000/entries", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(newUser),
-    });
-    const data = await res.json();
-    setEntries([...entries, data]);
+    // const res = await fetch("http://localhost:5000/entries", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-type": "application/json",
+    //   },
+    //   body: JSON.stringify(newUser),
+    // });
+    // const data = await res.json();
+    // setEntries([...entries, data]);
+
+    const res = await axios.post("http://localhost:5000/entries", newUser);
+    setEntries([...entries, res.data]);
 
     setName("");
     setPhone("");

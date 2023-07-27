@@ -1,3 +1,4 @@
+import axios from "axios";
 export async function handleUpdateUser(
   setEntries,
   name,
@@ -27,13 +28,15 @@ export async function handleUpdateUser(
     phone: phone === "" ? toBeUpdated.phone : phone,
     address: address === "" ? toBeUpdated.address : address,
   };
-  await fetch(`http://localhost:5000/entries/${updateUser.id}`, {
-    method: "PUT",
-    headers: {
-      "Content-type": "application/json",
-    },
-    body: JSON.stringify(updateUser),
-  });
+  // await fetch(`http://localhost:5000/entries/${updateUser.id}`, {
+  //   method: "PUT",
+  //   headers: {
+  //     "Content-type": "application/json",
+  //   },
+  //   body: JSON.stringify(updateUser),
+  // });
+  await axios.put(`http://localhost:5000/entries/${updateUser.id}`, updateUser);
+
   handleUpdateEntry(updateUser);
   setName("");
   setPhone("");
