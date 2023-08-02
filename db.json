@@ -2,51 +2,51 @@
   "entries": [
     {
       "id": "1",
-      "name": "Shivank1",
-      "phone": "7987388402",
-      "address": "Indore, MP"
+      "name": "Mandalorian",
+      "phone": "8476394857",
+      "address": "Mandalore"
     },
     {
       "id": "2",
-      "name": "Raghav1",
-      "phone": "8888888888",
-      "address": "Indore, MP"
+      "name": "Anakin Skywalker",
+      "phone": "5873927483",
+      "address": "Tatooine"
     },
     {
       "id": "3",
-      "name": "Shivank2",
+      "name": "Grogu",
       "phone": "7987388402",
-      "address": "Indore, MP"
+      "address": "Jedi Temple, Coruscant"
     },
     {
       "id": "4",
-      "name": "Raghav2",
-      "phone": "8888888888",
-      "address": "Indore, MP"
+      "name": "Khal Drogo",
+      "phone": "8675948763",
+      "address": "Dothraki Land"
     },
     {
       "id": "5",
-      "name": "Shivank3",
-      "phone": "7987388402",
-      "address": "Indore, MP"
+      "name": "Aquaman",
+      "phone": "8928573897",
+      "address": "Atlantis"
     },
     {
       "id": "6",
-      "name": "Raghav3",
-      "phone": "8888888888",
-      "address": "Indore, MP"
+      "name": "Gandalf",
+      "phone": "8739275937",
+      "address": "Gardens of Lorien"
     },
     {
       "id": "7",
-      "name": "Shivank4",
-      "phone": "7987388402",
-      "address": "Indore, MP"
+      "name": "John Wick",
+      "phone": "8579302857",
+      "address": "New York City, USA"
     },
     {
       "id": "8",
-      "name": "Raghav4",
-      "phone": "8888888888",
-      "address": "Indore, MP"
+      "name": "Jason Bourne",
+      "phone": "7849357694",
+      "address": "CIA headquarters, USA"
     },
     {
       "id": "9",
@@ -71,6 +71,12 @@
       "name": "Dr. Stephen Strange",
       "phone": "7654567654",
       "address": "London, UK"
+    },
+    {
+      "id": "KZtZLcMp",
+      "name": "Nick Fury",
+      "phone": "0001112223",
+      "address": "Location Unknown"
     }
   ]
 }

@@ -16,11 +16,22 @@ import {
   Input,
   Label,
   Table,
+  Dropdown,
+  DropdownToggle,
+  DropdownItem,
+  DropdownMenu,
 } from "reactstrap";
+
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 
 import { handleNewUser } from "./Methods/handleNewUser";
 import { handleUpdateUser } from "./Methods/handleUpdateUser";
 import { deleteTheUser } from "./Methods/deleteTheUser";
+
+import FilterInput from "./Components/FilterInput";
+import SignIn from "./Components/SignIn";
+import SignUp from "./Components/SignUp";
+import NavBarLinks from "./Components/NavBarLinks";
 
 function App() {
   const [name, setName] = useState("");
@@ -37,8 +48,23 @@ function App() {
     address: "",
   });
 
+  const [filterValue, setFilterValue] = useState("");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const [signUpForm, setSignUpForm] = useState(false);
+
+  // const signUpToggle = () => setSignUpForm(!signUpForm);
+
   const toggle = () => setModal(!modal);
   const toggle2 = () => setEditUser(!editUser);
+  const toggle3 = () => setDropdownOpen((prevState) => !prevState);
+
+  const [filterParameter, setFilterParameter] = useState({
+    "No Filter": true,
+    "Filter By Name": false,
+    "Filter By Phone": false,
+    "Filter By Address": false,
+  });
 
   const editTheUser = (entry) => {
     toggle2();
@@ -57,11 +83,13 @@ function App() {
     }
   };
 
+  // Function to set the fetched entries from server to the entries state
+  const getEntries = async () => {
+    const entriesFromServer = await fetchEntries();
+    setEntries(entriesFromServer);
+  };
+
   useEffect(() => {
-    const getEntries = async () => {
-      const entriesFromServer = await fetchEntries();
-      setEntries(entriesFromServer);
-    };
     getEntries();
   }, []);
 
@@ -70,185 +98,300 @@ function App() {
   }, [entries]);
 
   return (
-    <div className="App">
-      <Navbar color="secondary" dark expand="xl" container="fluid">
-        <NavbarBrand href="/">
-          <h1>
-            e-<span style={{ color: "yellow" }}>Yellow</span> Pages
-          </h1>
-        </NavbarBrand>
-      </Navbar>
-
-      <Container className="d-flex justify-content-center">
-        <Button className="add-user" color="dark" onClick={toggle}>
-          Add User
-        </Button>
-      </Container>
-
-      <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>
-          Fill in the details of the user :
-        </ModalHeader>
-        <ModalBody>
-          <Form>
-            <FormGroup>
-              <Label for="exampleName">Name</Label>
-              <Input
-                id="exampleName"
-                name="name"
-                placeholder="John Wick"
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="examplePhone">Phone</Label>
-              <Input
-                id="examplePhone"
-                name="phone"
-                placeholder="0000000000"
-                type="number"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="exampleAddress">Address</Label>
-              <Input
-                id="exampleAddress"
-                name="address"
-                placeholder="New York City, USA"
-                type="textarea"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-              />
-            </FormGroup>
-          </Form>
-        </ModalBody>
-        <ModalFooter>
-          <Button
-            type="submit"
-            color="secondary"
-            onClick={() =>
-              handleNewUser(
-                name,
-                phone,
-                address,
-                entries,
-                setEntries,
-                setName,
-                setPhone,
-                setAddress,
-                setModal
-              )
+    <Router>
+      <div className="App">
+        {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+        <Routes>
+          <Route
+            path="/sign-in"
+            element={
+              <>
+                <SignIn />
+              </>
             }
-          >
-            Submit
-          </Button>
-        </ModalFooter>
-      </Modal>
-      <br />
-      <Table hover className="entries-wrapper">
-        <tbody className="table-secondary">
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Phone</th>
-            <th>Address</th>
-            <th></th>
-          </tr>
+          />
+          <Route
+            path="/sign-up"
+            element={
+              <>
+                {/* {signUpForm && ( */}
+                <SignUp
+                // showSignUp={signUpForm}
+                // onSignUp={() => setSignUpForm(!signUpForm)}
+                />
+                {/* )} */}
+              </>
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <>
+                <Navbar color="secondary" dark expand="xl" container="fluid">
+                  <NavbarBrand href="/">
+                    <h1>
+                      e-<span style={{ color: "yellow" }}>Yellow</span> Pages
+                    </h1>
+                  </NavbarBrand>
+                  <NavBarLinks
+                    onSignUp={() => setSignUpForm(!signUpForm)}
+                    showSignUp={signUpForm}
+                  ></NavBarLinks>
+                </Navbar>
 
-          {entries &&
-            entries.map((entry, index) => (
-              <tr key={entry.id} className="entry">
-                <td>{index + 1}</td>
-                <td>{entry.name}</td>
-                <td>{entry.phone}</td>
-                <td>{entry.address}</td>
-                <td colSpan="3">
-                  <div className="icon-wrappers">
-                    <div
-                      className="icon1"
-                      onClick={() => editTheUser(entry)}
-                    ></div>
-                    <div
-                      className="icon2"
-                      onClick={() =>
-                        deleteTheUser(entry.id, fetchEntries, setEntries)
-                      }
-                    ></div>
+                <Container id="addUserSearch" className="d-flex">
+                  <Button className="add-user" color="dark" onClick={toggle}>
+                    Add User
+                  </Button>
+                  <div style={{ display: "flex", height: "3rem" }}>
+                    <FilterInput
+                      filterValue={filterValue}
+                      setFilterValue={setFilterValue}
+                      filterParameter={filterParameter}
+                      entries={entries}
+                      setEntries={setEntries}
+                      getEntries={getEntries}
+                    />
+                    <Dropdown
+                      isOpen={dropdownOpen}
+                      toggle={toggle3}
+                      direction="left"
+                    >
+                      {/* <DropdownMenu> */}
+                      <DropdownToggle
+                        caret
+                        style={{ height: "3rem" }}
+                      ></DropdownToggle>
+                      <DropdownMenu>
+                        <DropdownItem
+                          onClick={() => {
+                            // document.getElementById(
+                            //   "search-yellow-pages"
+                            // ).placeholder = "No Filter";
+                            setFilterParameter({
+                              "No Filter": true,
+                              "Filter By Name": false,
+                              "Filter By Phone": false,
+                              "Filter By Address": false,
+                            });
+                          }}
+                        >
+                          No Filter
+                        </DropdownItem>
+                        <DropdownItem
+                          onClick={() => {
+                            setFilterParameter({
+                              "No Filter": false,
+                              "Filter By Name": true,
+                              "Filter By Phone": false,
+                              "Filter By Address": false,
+                            });
+                          }}
+                        >
+                          Filter By Name
+                        </DropdownItem>
+                        <DropdownItem
+                          onClick={() => {
+                            setFilterParameter({
+                              "No Filter": false,
+                              "Filter By Name": false,
+                              "Filter By Phone": true,
+                              "Filter By Address": false,
+                            });
+                          }}
+                        >
+                          Filter By Phone
+                        </DropdownItem>
+                        <DropdownItem
+                          onClick={() => {
+                            setFilterParameter({
+                              "No Filter": false,
+                              "Filter By Name": false,
+                              "Filter By Phone": false,
+                              "Filter By Address": true,
+                            });
+                          }}
+                        >
+                          Filter By Address
+                        </DropdownItem>
+                      </DropdownMenu>
+                    </Dropdown>
                   </div>
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </Table>
+                </Container>
+                <Modal isOpen={modal} toggle={toggle}>
+                  <ModalHeader toggle={toggle}>
+                    Fill in the details of the user :
+                  </ModalHeader>
+                  <ModalBody>
+                    <Form>
+                      <FormGroup>
+                        <Label for="exampleName">Name</Label>
+                        <Input
+                          id="exampleName"
+                          name="name"
+                          placeholder="John Wick"
+                          type="text"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                        />
+                      </FormGroup>
+                      <FormGroup>
+                        <Label for="examplePhone">Phone</Label>
+                        <Input
+                          id="examplePhone"
+                          name="phone"
+                          placeholder="0000000000"
+                          type="number"
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
+                        />
+                      </FormGroup>
+                      <FormGroup>
+                        <Label for="exampleAddress">Address</Label>
+                        <Input
+                          id="exampleAddress"
+                          name="address"
+                          placeholder="New York City, USA"
+                          type="textarea"
+                          value={address}
+                          onChange={(e) => setAddress(e.target.value)}
+                        />
+                      </FormGroup>
+                    </Form>
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button
+                      type="submit"
+                      color="secondary"
+                      onClick={() =>
+                        handleNewUser(
+                          name,
+                          phone,
+                          address,
+                          entries,
+                          setEntries,
+                          setName,
+                          setPhone,
+                          setAddress,
+                          setModal
+                        )
+                      }
+                    >
+                      Submit
+                    </Button>
+                  </ModalFooter>
+                </Modal>
+                <br />
+                <Table hover className="entries-wrapper">
+                  <tbody className="table-secondary">
+                    <tr>
+                      <th>#</th>
+                      <th>Name</th>
+                      <th>Phone</th>
+                      <th>Address</th>
+                      <th></th>
+                    </tr>
 
-      <Modal isOpen={editUser} toggle={toggle2}>
-        <ModalHeader toggle={toggle2}>
-          Edit the details of the user :
-        </ModalHeader>
-        <ModalBody>
-          <Form>
-            <FormGroup>
-              <Label for="exampleName">Name</Label>
-              <Input
-                id="exampleName"
-                name="name"
-                placeholder="John Wick"
-                type="text"
-                defaultValue={toBeUpdated.name}
-                onInput={(e) => setName(e.target.value)}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="examplePhone">Phone</Label>
-              <Input
-                id="examplePhone"
-                name="phone"
-                placeholder="0000000000"
-                type="number"
-                defaultValue={toBeUpdated.phone}
-                onInput={(e) => setPhone(e.target.value)}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="exampleAddress">Address</Label>
-              <Input
-                id="exampleAddress"
-                name="address"
-                placeholder="New York City, USA"
-                type="textarea"
-                defaultValue={toBeUpdated.address}
-                onInput={(e) => setAddress(e.target.value)}
-              />
-            </FormGroup>
-          </Form>
-        </ModalBody>
-        <ModalFooter>
-          <Button
-            color="secondary"
-            onClick={() =>
-              handleUpdateUser(
-                setEntries,
-                name,
-                phone,
-                address,
-                setName,
-                setPhone,
-                setAddress,
-                toBeUpdated,
-                setToBeUpdated,
-                setEditUser
-              )
+                    {entries &&
+                      entries.map((entry, index) => (
+                        <tr key={entry.id} className="entry">
+                          <td>{index + 1}</td>
+                          <td>{entry.name}</td>
+                          <td>{entry.phone}</td>
+                          <td>{entry.address}</td>
+                          <td colSpan="3">
+                            <div className="icon-wrappers">
+                              <div
+                                className="icon1"
+                                onClick={() => editTheUser(entry)}
+                              ></div>
+                              <div
+                                className="icon2"
+                                onClick={() =>
+                                  deleteTheUser(
+                                    entry.id,
+                                    fetchEntries,
+                                    setEntries
+                                  )
+                                }
+                              ></div>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </Table>
+
+                <Modal isOpen={editUser} toggle={toggle2}>
+                  <ModalHeader toggle={toggle2}>
+                    Edit the details of the user :
+                  </ModalHeader>
+                  <ModalBody>
+                    <Form>
+                      <FormGroup>
+                        <Label for="exampleName">Name</Label>
+                        <Input
+                          id="exampleName"
+                          name="name"
+                          placeholder="John Wick"
+                          type="text"
+                          defaultValue={toBeUpdated.name}
+                          onInput={(e) => setName(e.target.value)}
+                        />
+                      </FormGroup>
+                      <FormGroup>
+                        <Label for="examplePhone">Phone</Label>
+                        <Input
+                          id="examplePhone"
+                          name="phone"
+                          placeholder="0000000000"
+                          type="number"
+                          defaultValue={toBeUpdated.phone}
+                          onInput={(e) => setPhone(e.target.value)}
+                        />
+                      </FormGroup>
+                      <FormGroup>
+                        <Label for="exampleAddress">Address</Label>
+                        <Input
+                          id="exampleAddress"
+                          name="address"
+                          placeholder="New York City, USA"
+                          type="textarea"
+                          defaultValue={toBeUpdated.address}
+                          onInput={(e) => setAddress(e.target.value)}
+                        />
+                      </FormGroup>
+                    </Form>
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button
+                      color="secondary"
+                      onClick={() =>
+                        handleUpdateUser(
+                          setEntries,
+                          name,
+                          phone,
+                          address,
+                          setName,
+                          setPhone,
+                          setAddress,
+                          toBeUpdated,
+                          setToBeUpdated,
+                          setEditUser
+                        )
+                      }
+                    >
+                      Save
+                    </Button>
+                  </ModalFooter>
+                </Modal>
+              </>
             }
-          >
-            Save
-          </Button>
-        </ModalFooter>
-      </Modal>
-    </div>
+          />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
