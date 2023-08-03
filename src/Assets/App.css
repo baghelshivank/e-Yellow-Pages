@@ -135,3 +135,9 @@
  border-radius: 20%;
 }
 
+/* Pagination Bar */
+#pagination-bar{
+    display: flex;
+    justify-content: center;
+}
+

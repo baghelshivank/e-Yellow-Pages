@@ -22,7 +22,7 @@ import {
   DropdownMenu,
 } from "reactstrap";
 
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import { handleNewUser } from "./Methods/handleNewUser";
 import { handleUpdateUser } from "./Methods/handleUpdateUser";
@@ -32,12 +32,17 @@ import FilterInput from "./Components/FilterInput";
 import SignIn from "./Components/SignIn";
 import SignUp from "./Components/SignUp";
 import NavBarLinks from "./Components/NavBarLinks";
+import TableEntries from "./Components/TableEntries";
+import Pagination from "./Components/Pagination";
 
 function App() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [entries, setEntries] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [entriesPerPage, setEntriesPerPage] = useState(5);
 
   const [modal, setModal] = useState(false);
   const [editUser, setEditUser] = useState(false);
@@ -50,10 +55,7 @@ function App() {
 
   const [filterValue, setFilterValue] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
   const [signUpForm, setSignUpForm] = useState(false);
-
-  // const signUpToggle = () => setSignUpForm(!signUpForm);
 
   const toggle = () => setModal(!modal);
   const toggle2 = () => setEditUser(!editUser);
@@ -83,10 +85,12 @@ function App() {
     }
   };
 
-  // Function to set the fetched entries from server to the entries state
+  // Function to fetch and then set the fetched entries from server to the entries state
   const getEntries = async () => {
+    setLoading(true);
     const entriesFromServer = await fetchEntries();
     setEntries(entriesFromServer);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -96,6 +100,16 @@ function App() {
   useEffect(() => {
     console.log("Entries from useEffect", entries);
   }, [entries]);
+
+  // Get current entries
+  const indexOfLastEntry = currentPage * entriesPerPage;
+  const indexOfFirstEntry = indexOfLastEntry - entriesPerPage;
+  const currentEntries = entries.slice(indexOfFirstEntry, indexOfLastEntry);
+
+  // Change page
+  const paginate = (number) => {
+    setCurrentPage(number);
+  };
 
   return (
     <Router>
@@ -283,46 +297,21 @@ function App() {
                   </ModalFooter>
                 </Modal>
                 <br />
-                <Table hover className="entries-wrapper">
-                  <tbody className="table-secondary">
-                    <tr>
-                      <th>#</th>
-                      <th>Name</th>
-                      <th>Phone</th>
-                      <th>Address</th>
-                      <th></th>
-                    </tr>
 
-                    {entries &&
-                      entries.map((entry, index) => (
-                        <tr key={entry.id} className="entry">
-                          <td>{index + 1}</td>
-                          <td>{entry.name}</td>
-                          <td>{entry.phone}</td>
-                          <td>{entry.address}</td>
-                          <td colSpan="3">
-                            <div className="icon-wrappers">
-                              <div
-                                className="icon1"
-                                onClick={() => editTheUser(entry)}
-                              ></div>
-                              <div
-                                className="icon2"
-                                onClick={() =>
-                                  deleteTheUser(
-                                    entry.id,
-                                    fetchEntries,
-                                    setEntries
-                                  )
-                                }
-                              ></div>
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
-                  </tbody>
-                </Table>
+                <TableEntries
+                  currentEntries={currentEntries}
+                  loading={loading}
+                  editTheUser={editTheUser}
+                  deleteTheUser={deleteTheUser}
+                  fetchEntries={fetchEntries}
+                  setEntries={setEntries}
+                />
 
+                <Pagination
+                  entriesPerPage={entriesPerPage}
+                  totalEntries={entries.length}
+                  paginate={paginate}
+                />
                 <Modal isOpen={editUser} toggle={toggle2}>
                   <ModalHeader toggle={toggle2}>
                     Edit the details of the user :

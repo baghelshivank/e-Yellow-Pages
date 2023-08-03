@@ -43,8 +43,6 @@ const FilterInput = ({
       );
       setEntries(filteredEntries);
     }
-
-    // Add other conditions for "Filter By Phone" and "Filter By Address" as needed
   }, [filterValue, filterParameter]);
 
   return (
