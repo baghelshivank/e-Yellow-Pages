@@ -7,6 +7,7 @@ const TableEntries = ({
   editTheUser,
   deleteTheUser,
   fetchEntries,
+  entries,
   setEntries,
 }) => {
   if (loading) {
@@ -17,7 +18,7 @@ const TableEntries = ({
       <Table hover className="entries-wrapper">
         <tbody className="table-secondary">
           <tr>
-            <th>#</th>
+            <th>S.No.</th>
             <th>Name</th>
             <th>Phone</th>
             <th>Address</th>
@@ -25,7 +26,10 @@ const TableEntries = ({
           </tr>
           {currentEntries.map((entry, index) => (
             <tr key={entry.id} className="entry">
-              <td>{index + 1}</td>
+              <td>
+                {entries.findIndex((entryy) => entryy.id === entry.id) + 1}
+              </td>
+              {/* <td>{index + 1}</td> */}
               <td>{entry.name}</td>
               <td>{entry.phone}</td>
               <td>{entry.address}</td>

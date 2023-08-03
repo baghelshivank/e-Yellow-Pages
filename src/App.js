@@ -42,7 +42,7 @@ function App() {
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [entriesPerPage, setEntriesPerPage] = useState(5);
+  const [entriesPerPage] = useState(5);
 
   const [modal, setModal] = useState(false);
   const [editUser, setEditUser] = useState(false);
@@ -304,6 +304,7 @@ function App() {
                   editTheUser={editTheUser}
                   deleteTheUser={deleteTheUser}
                   fetchEntries={fetchEntries}
+                  entries={entries}
                   setEntries={setEntries}
                 />
 
