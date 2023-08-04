@@ -1,12 +1,6 @@
 import axios from "axios";
 export async function handleUpdateUser(
   setEntries,
-  name,
-  phone,
-  address,
-  setName,
-  setPhone,
-  setAddress,
   toBeUpdated,
   setToBeUpdated,
   setEditUser
@@ -24,9 +18,14 @@ export async function handleUpdateUser(
 
   const updateUser = {
     id: toBeUpdated.id,
-    name: name === "" ? toBeUpdated.name : name,
-    phone: phone === "" ? toBeUpdated.phone : phone,
-    address: address === "" ? toBeUpdated.address : address,
+    name: toBeUpdated.name,
+    gender: toBeUpdated.gender,
+    department: toBeUpdated.department,
+    projects: toBeUpdated.projects,
+    email: toBeUpdated.email,
+    phone: toBeUpdated.phone,
+    address: toBeUpdated.address,
+    password: toBeUpdated.password,
   };
   // await fetch(`http://localhost:5000/entries/${updateUser.id}`, {
   //   method: "PUT",
@@ -38,14 +37,17 @@ export async function handleUpdateUser(
   await axios.put(`http://localhost:5000/entries/${updateUser.id}`, updateUser);
 
   handleUpdateEntry(updateUser);
-  setName("");
-  setPhone("");
-  setAddress("");
   setToBeUpdated({
     id: "",
     name: "",
+    gender: "",
+    department: "",
+    projects: [],
+    email: "",
     phone: "",
     address: "",
+    password: "",
   });
+
   setEditUser(false);
 }

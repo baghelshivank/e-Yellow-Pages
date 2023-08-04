@@ -1,22 +1,29 @@
 import axios from "axios";
+
 import { generateRandomId } from "./generateRandomId";
 export async function handleNewUser(
-  name,
-  phone,
-  address,
+  // name,
+  // phone,
+  // address,
+  formData,
   entries,
-  setEntries,
-  setName,
-  setPhone,
-  setAddress,
-  setModal
+  setEntries
+  // setName,
+  // setPhone,
+  // setAddress,
+  // setModal
 ) {
   try {
     const newUser = {
       id: generateRandomId(entries),
-      name: name,
-      phone: phone,
-      address: address,
+      name: formData.name,
+      gender: formData.gender,
+      department: formData.department,
+      projects: formData.projects,
+      email: formData.email,
+      phone: formData.phone,
+      address: formData.address,
+      password: formData.password,
     };
     // const res = await fetch("http://localhost:5000/entries", {
     //   method: "POST",
@@ -30,11 +37,10 @@ export async function handleNewUser(
 
     const res = await axios.post("http://localhost:5000/entries", newUser);
     setEntries([...entries, res.data]);
-
-    setName("");
-    setPhone("");
-    setAddress("");
-    setModal(false);
+    // setName("");
+    // setPhone("");
+    // setAddress("");
+    // setModal(false);
   } catch (error) {
     console.error("Error in updating the existingEntries : ", error);
   }

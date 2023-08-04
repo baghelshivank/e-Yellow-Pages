@@ -3,104 +3,226 @@
     {
       "id": "1",
       "name": "Mandalorian",
+      "gender": "Male",
+      "department": "Front End",
+      "projects": [
+        "Banking Application"
+      ],
+      "email": "mandalorian@gmail.com",
       "phone": "8476394857",
-      "address": "Mandalore"
+      "address": "Mandalore",
+      "password": ""
     },
     {
       "id": "2",
       "name": "Anakin Skywalker",
+      "gender": "Male",
+      "department": "Front End",
+      "projects": [
+        "Banking Application"
+      ],
+      "email": "anakin@gmail.com",
       "phone": "5873927483",
-      "address": "Tatooine"
+      "address": "Tatooine",
+      "password": ""
     },
     {
       "id": "3",
       "name": "Grogu",
+      "gender": "Male",
+      "department": "Front End",
+      "projects": [
+        "Banking Application"
+      ],
+      "email": "grogu@gmail.com",
       "phone": "7987388402",
-      "address": "Jedi Temple, Coruscant"
+      "address": "Jedi Temple, Coruscant",
+      "password": ""
     },
     {
       "id": "4",
       "name": "Khal Drogo",
+      "gender": "Other",
+      "department": "Testing",
+      "projects": [
+        "Library Management App"
+      ],
+      "email": "khal@gmail.com",
       "phone": "8675948763",
-      "address": "Dothraki Land"
+      "address": "Dothraki Land",
+      "password": ""
     },
     {
       "id": "5",
       "name": "Aquaman",
+      "gender": "Male",
+      "department": "Back End",
+      "projects": [
+        "Library Management App"
+      ],
+      "email": "arthurcurry@gmail.com",
       "phone": "8928573897",
-      "address": "Atlantis"
+      "address": "Atlantis",
+      "password": ""
     },
     {
       "id": "6",
       "name": "Gandalf",
+      "gender": "Male",
+      "department": "Back End",
+      "projects": [
+        "Library Management App"
+      ],
+      "email": "gandalf@yahoomail.com",
       "phone": "8739275937",
-      "address": "Gardens of Lorien"
+      "address": "Gardens of Lorien",
+      "password": ""
     },
     {
       "id": "7",
       "name": "John Wick",
+      "gender": "Male",
+      "department": "UI/UX",
+      "projects": [
+        "EdTech App"
+      ],
+      "email": "wickwick@gmail.com",
       "phone": "8579302857",
-      "address": "New York City, USA"
+      "address": "New York City, USA",
+      "password": ""
     },
     {
       "id": "8",
       "name": "Jason Bourne",
+      "gender": "Male",
+      "department": "UI/UX",
+      "projects": [
+        "EdTech App"
+      ],
+      "email": "bourneultimatum@gmail.com",
       "phone": "7849357694",
-      "address": "CIA headquarters, USA"
+      "address": "CIA headquarters, USA",
+      "password": ""
     },
     {
       "id": "9",
       "name": "Bruce Wayne",
+      "gender": "Male",
+      "department": "UI/UX",
+      "projects": [
+        "EdTech App"
+      ],
+      "email": "iambatman@gmail.com",
       "phone": "4857685949",
-      "address": "Gotham"
+      "address": "Gotham",
+      "password": ""
     },
     {
       "id": "10",
       "name": "Thor",
+      "gender": "Male",
+      "department": "Dev Ops",
+      "projects": [
+        "FinTech App"
+      ],
+      "email": "bringmethanos@gmail.com",
       "phone": "8888888888",
-      "address": "Asgard"
+      "address": "Asgard",
+      "password": ""
     },
     {
       "id": "11",
       "name": "Tony Stark",
+      "gender": "Male",
+      "department": "Dev Ops",
+      "projects": [
+        "FinTech App"
+      ],
+      "email": "iamironman@gmail.com",
       "phone": "7878787878",
-      "address": "Stark Tower, New York"
+      "address": "Stark Tower, New York",
+      "password": ""
     },
     {
       "id": "UJeAXqKn",
       "name": "Dr. Stephen Strange",
+      "gender": "Male",
+      "department": "Dev Ops",
+      "projects": [
+        "FinTech App"
+      ],
+      "email": "timestone@gmail.com",
       "phone": "7654567654",
-      "address": "London, UK"
+      "address": "London, UK",
+      "password": ""
     },
     {
       "id": "KZtZLcMp",
       "name": "Nick Fury",
+      "gender": "Male",
+      "department": "Testing",
+      "projects": [
+        "E-Commerce App"
+      ],
+      "email": "avengersinitiative@gmail.com",
       "phone": "2140007654",
-      "address": "Location Unknown"
+      "address": "Location Unknown",
+      "password": ""
     },
     {
       "id": "vbhHaknm",
       "name": "Natasha Romanoff",
+      "gender": "Female",
+      "department": "Back End",
+      "projects": [
+        "FinTech App",
+        "E-Commerce App"
+      ],
+      "email": "soulstone@gmail.com",
       "phone": "4638945038",
-      "address": "Stalingrad, Russia"
+      "address": "Stalingrad, Russia",
+      "password": ""
     },
     {
       "id": "RUBGJZd1",
       "name": "Bruce Banner",
+      "gender": "Male",
+      "department": "Testing",
+      "projects": [
+        "E-Commerce App"
+      ],
+      "email": "bringmeloki@gmail.com",
       "phone": "9119119110",
-      "address": "Ohio, USA"
+      "address": "Ohio, USA",
+      "password": ""
     },
     {
-      "id": "IFy8OWdb",
+      "id": "DxiFzCr2",
+      "name": "Shiva",
+      "gender": "Male",
+      "department": "Front End",
+      "projects": [
+        "Library Management App"
+      ],
+      "email": "baghelshivank97@gmail.com",
+      "phone": "4444444",
+      "address": "ggggggggggggggggggggggg",
+      "password": "$2a$10$ulshDrBoSFHqhSh1HXGyleMBNQaIN5AV23zg01cop90.gAYCIbsne"
+    },
+    {
+      "id": "IMIwnsbW",
       "name": "Shivank Singh Baghel",
-      "phone": "44444",
-      "address": "44444444444444"
-    },
-    {
-      "id": "7aSVkANK",
-      "name": "Mangald",
-      "phone": "444444",
-      "address": "ffffffffffff"
+      "gender": "Male",
+      "department": "Back End",
+      "projects": [
+        "E-Commerce App",
+        "FinTech App",
+        "EdTech App"
+      ],
+      "email": "baghelshivank97@gmail.com",
+      "phone": "22222222",
+      "address": "ddddddddddddd",
+      "password": "$2a$10$Yfqzy.UNokw59f.gzSPLzuAazARAa//XOf8vzKy2PMtkY71TYbpTC"
     }
   ]
 }

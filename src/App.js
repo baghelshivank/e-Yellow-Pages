@@ -15,7 +15,6 @@ import {
   FormGroup,
   Input,
   Label,
-  Table,
   Dropdown,
   DropdownToggle,
   DropdownItem,
@@ -24,7 +23,6 @@ import {
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import { handleNewUser } from "./Methods/handleNewUser";
 import { handleUpdateUser } from "./Methods/handleUpdateUser";
 import { deleteTheUser } from "./Methods/deleteTheUser";
 
@@ -36,9 +34,18 @@ import TableEntries from "./Components/TableEntries";
 import Pagination from "./Components/Pagination";
 
 function App() {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
+  const [formData, setFormData] = useState({
+    id: "",
+    name: "",
+    gender: "",
+    department: "",
+    projects: [],
+    email: "",
+    phone: "",
+    address: "",
+    password: "",
+  });
+
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -49,8 +56,13 @@ function App() {
   const [toBeUpdated, setToBeUpdated] = useState({
     id: "",
     name: "",
+    gender: "",
+    department: "",
+    projects: [],
+    email: "",
     phone: "",
     address: "",
+    password: "",
   });
 
   const [filterValue, setFilterValue] = useState("");
@@ -111,6 +123,17 @@ function App() {
     setCurrentPage(number);
   };
 
+  // Store the changes made in input field to "formData"
+  const handleChange = (e) => {
+    setToBeUpdated({ ...toBeUpdated, [e.target.name]: e.target.value });
+  };
+  const handleProjectChange = (e) => {
+    const { value, checked } = e.target;
+    const updatedProjects = checked
+      ? [...toBeUpdated.projects, value]
+      : toBeUpdated.projects.filter((project) => project !== value);
+    setToBeUpdated({ ...toBeUpdated, projects: updatedProjects });
+  };
   return (
     <Router>
       <div className="App">
@@ -129,12 +152,12 @@ function App() {
             path="/sign-up"
             element={
               <>
-                {/* {signUpForm && ( */}
                 <SignUp
-                // showSignUp={signUpForm}
-                // onSignUp={() => setSignUpForm(!signUpForm)}
+                  formData={formData}
+                  setFormData={setFormData}
+                  entries={entries}
+                  setEntries={setEntries}
                 />
-                {/* )} */}
               </>
             }
           />
@@ -155,9 +178,9 @@ function App() {
                 </Navbar>
 
                 <Container id="addUserSearch" className="d-flex">
-                  <Button className="add-user" color="dark" onClick={toggle}>
+                  {/* <Button className="add-user" color="dark" onClick={toggle}>
                     Add User
-                  </Button>
+                  </Button> */}
                   <div style={{ display: "flex", height: "3rem" }}>
                     <FilterInput
                       filterValue={filterValue}
@@ -233,69 +256,6 @@ function App() {
                     </Dropdown>
                   </div>
                 </Container>
-                <Modal isOpen={modal} toggle={toggle}>
-                  <ModalHeader toggle={toggle}>
-                    Fill in the details of the user :
-                  </ModalHeader>
-                  <ModalBody>
-                    <Form>
-                      <FormGroup>
-                        <Label for="exampleName">Name</Label>
-                        <Input
-                          id="exampleName"
-                          name="name"
-                          placeholder="John Wick"
-                          type="text"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                        />
-                      </FormGroup>
-                      <FormGroup>
-                        <Label for="examplePhone">Phone</Label>
-                        <Input
-                          id="examplePhone"
-                          name="phone"
-                          placeholder="0000000000"
-                          type="number"
-                          value={phone}
-                          onChange={(e) => setPhone(e.target.value)}
-                        />
-                      </FormGroup>
-                      <FormGroup>
-                        <Label for="exampleAddress">Address</Label>
-                        <Input
-                          id="exampleAddress"
-                          name="address"
-                          placeholder="New York City, USA"
-                          type="textarea"
-                          value={address}
-                          onChange={(e) => setAddress(e.target.value)}
-                        />
-                      </FormGroup>
-                    </Form>
-                  </ModalBody>
-                  <ModalFooter>
-                    <Button
-                      type="submit"
-                      color="secondary"
-                      onClick={() =>
-                        handleNewUser(
-                          name,
-                          phone,
-                          address,
-                          entries,
-                          setEntries,
-                          setName,
-                          setPhone,
-                          setAddress,
-                          setModal
-                        )
-                      }
-                    >
-                      Submit
-                    </Button>
-                  </ModalFooter>
-                </Modal>
                 <br />
 
                 <TableEntries
@@ -315,7 +275,7 @@ function App() {
                 />
                 <Modal isOpen={editUser} toggle={toggle2}>
                   <ModalHeader toggle={toggle2}>
-                    Edit the details of the user :
+                    <b>Edit the details of the user :</b>
                   </ModalHeader>
                   <ModalBody>
                     <Form>
@@ -327,7 +287,143 @@ function App() {
                           placeholder="John Wick"
                           type="text"
                           defaultValue={toBeUpdated.name}
-                          onInput={(e) => setName(e.target.value)}
+                          // value={formData.name}
+                          onInput={handleChange}
+                        />
+                      </FormGroup>
+                      <FormGroup>
+                        <Label>Gender</Label>
+                        <FormGroup check>
+                          <Label check>
+                            <Input
+                              id="exampleGenderMale"
+                              name="gender"
+                              type="radio"
+                              value="Male"
+                              checked={toBeUpdated.gender === "Male"}
+                              onChange={handleChange}
+                            />{" "}
+                            Male
+                          </Label>
+                        </FormGroup>
+                        <FormGroup check>
+                          <Label check>
+                            <Input
+                              id="exampleGenderFemale"
+                              name="gender"
+                              type="radio"
+                              value="Female"
+                              checked={toBeUpdated.gender === "Female"}
+                              onChange={handleChange}
+                            />{" "}
+                            Female
+                          </Label>
+                        </FormGroup>
+                        <FormGroup check>
+                          <Label check>
+                            <Input
+                              id="exampleGenderOther"
+                              name="gender"
+                              type="radio"
+                              value="Other"
+                              checked={toBeUpdated.gender === "Other"}
+                              onChange={handleChange}
+                            />{" "}
+                            Other
+                          </Label>
+                        </FormGroup>
+                      </FormGroup>
+                      <FormGroup>
+                        <Label for="exampleDepartment">Department</Label>
+                        <Input
+                          id="exampleDepartment"
+                          name="department"
+                          type="select"
+                          defaultValue={toBeUpdated.department}
+                          onChange={handleChange}
+                        >
+                          <option value="Front End">Front End</option>
+                          <option value="Back End">Back End</option>
+                          <option value="UI/UX">UI/UX</option>
+                          <option value="Dev Ops">Dev Ops</option>
+                          <option value="Testing">Testing</option>
+                        </Input>
+                      </FormGroup>
+
+                      <FormGroup>
+                        <Label>Projects</Label>
+                        <FormGroup check>
+                          <Input
+                            name="projects"
+                            type="checkbox"
+                            value="Banking Application"
+                            checked={toBeUpdated.projects.includes(
+                              "Banking Application"
+                            )}
+                            onChange={handleProjectChange}
+                          />
+                          <Label check>Banking Application</Label>
+                        </FormGroup>
+                        <FormGroup check>
+                          <Input
+                            name="projects"
+                            type="checkbox"
+                            value="Library Management App"
+                            checked={toBeUpdated.projects.includes(
+                              "Library Management App"
+                            )}
+                            onChange={handleProjectChange}
+                          />
+                          <Label check>Library Management App</Label>
+                        </FormGroup>
+                        <FormGroup check>
+                          <Input
+                            name="projects"
+                            type="checkbox"
+                            value="EdTech App"
+                            checked={toBeUpdated.projects.includes(
+                              "EdTech App"
+                            )}
+                            onChange={handleProjectChange}
+                          />
+                          <Label check>EdTech App</Label>
+                        </FormGroup>
+                        <FormGroup check>
+                          <Input
+                            name="projects"
+                            type="checkbox"
+                            value="FinTech App"
+                            checked={toBeUpdated.projects.includes(
+                              "FinTech App"
+                            )}
+                            onChange={handleProjectChange}
+                          />
+                          <Label check>FinTech App</Label>
+                        </FormGroup>
+                        <FormGroup check>
+                          <Input
+                            name="projects"
+                            type="checkbox"
+                            value="E-Commerce App"
+                            checked={toBeUpdated.projects.includes(
+                              "E-Commerce App"
+                            )}
+                            onChange={handleProjectChange}
+                          />
+                          <Label check>E-Commerce App</Label>
+                        </FormGroup>
+                      </FormGroup>
+
+                      <FormGroup>
+                        <Label for="exampleEmail">Email</Label>
+                        <Input
+                          id="exampleEmail"
+                          name="email"
+                          placeholder="abc@example.com"
+                          type="email"
+                          // value={formData.email}
+                          defaultValue={toBeUpdated.email}
+                          onInput={handleChange}
                         />
                       </FormGroup>
                       <FormGroup>
@@ -338,7 +434,8 @@ function App() {
                           placeholder="0000000000"
                           type="number"
                           defaultValue={toBeUpdated.phone}
-                          onInput={(e) => setPhone(e.target.value)}
+                          // value={formData.phone}
+                          onInput={handleChange}
                         />
                       </FormGroup>
                       <FormGroup>
@@ -349,7 +446,8 @@ function App() {
                           placeholder="New York City, USA"
                           type="textarea"
                           defaultValue={toBeUpdated.address}
-                          onInput={(e) => setAddress(e.target.value)}
+                          // value={formData.address}
+                          onInput={handleChange}
                         />
                       </FormGroup>
                     </Form>
@@ -360,12 +458,6 @@ function App() {
                       onClick={() =>
                         handleUpdateUser(
                           setEntries,
-                          name,
-                          phone,
-                          address,
-                          setName,
-                          setPhone,
-                          setAddress,
                           toBeUpdated,
                           setToBeUpdated,
                           setEditUser

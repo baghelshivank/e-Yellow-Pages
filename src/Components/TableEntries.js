@@ -20,8 +20,8 @@ const TableEntries = ({
           <tr>
             <th>S.No.</th>
             <th>Name</th>
-            <th>Phone</th>
-            <th>Address</th>
+            <th>Gender</th>
+            <th>Department</th>
             <th></th>
           </tr>
           {currentEntries.map((entry, index) => (
@@ -31,8 +31,8 @@ const TableEntries = ({
               </td>
               {/* <td>{index + 1}</td> */}
               <td>{entry.name}</td>
-              <td>{entry.phone}</td>
-              <td>{entry.address}</td>
+              <td>{entry.gender}</td>
+              <td>{entry.department}</td>
               <td colSpan="3">
                 <div className="icon-wrappers">
                   <div
