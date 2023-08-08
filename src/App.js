@@ -25,6 +25,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import { handleUpdateUser } from "./Methods/handleUpdateUser";
 import { deleteTheUser } from "./Methods/deleteTheUser";
+import { handleDeleteMultiple } from "./Methods/handleDeleteMultiple";
 
 import FilterInput from "./Components/FilterInput";
 import SignIn from "./Components/SignIn";
@@ -44,14 +45,14 @@ function App() {
     phone: "",
     address: "",
     password: "",
+    admin: false,
   });
 
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [entriesPerPage] = useState(5);
+  const [entriesPerPage] = useState(7);
 
-  const [modal, setModal] = useState(false);
   const [editUser, setEditUser] = useState(false);
   const [toBeUpdated, setToBeUpdated] = useState({
     id: "",
@@ -63,23 +64,23 @@ function App() {
     phone: "",
     address: "",
     password: "",
+    admin: false,
   });
 
   const [filterValue, setFilterValue] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [signUpForm, setSignUpForm] = useState(false);
-
-  const toggle = () => setModal(!modal);
-  const toggle2 = () => setEditUser(!editUser);
-  const toggle3 = () => setDropdownOpen((prevState) => !prevState);
-
   const [filterParameter, setFilterParameter] = useState({
     "No Filter": true,
     "Filter By Name": false,
     "Filter By Phone": false,
     "Filter By Address": false,
   });
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isValidUser, setIsValidUser] = useState(false);
+  const [selectedEntries, setSelectedEntries] = useState([]);
 
+  const toggle2 = () => setEditUser(!editUser);
+  const toggle3 = () => setDropdownOpen((prevState) => !prevState);
   const editTheUser = (entry) => {
     toggle2();
     setToBeUpdated(entry);
@@ -134,6 +135,20 @@ function App() {
       : toBeUpdated.projects.filter((project) => project !== value);
     setToBeUpdated({ ...toBeUpdated, projects: updatedProjects });
   };
+  const handleCheckboxChange = (entryId) => {
+    const updatedSelectedEntries = selectedEntries.includes(entryId)
+      ? selectedEntries.filter((id) => id !== entryId)
+      : [...selectedEntries, entryId];
+
+    setSelectedEntries(updatedSelectedEntries);
+  };
+
+  // const handleDeleteMultiple = (
+  //   selectedEntries,
+  //   setSelectedEntries,
+  //   fetchEntries,
+  //   setEntries
+  // ) => {};
   return (
     <Router>
       <div className="App">
@@ -144,7 +159,10 @@ function App() {
             path="/sign-in"
             element={
               <>
-                <SignIn />
+                <SignIn
+                  setIsAdmin={setIsAdmin}
+                  setIsValidUser={setIsValidUser}
+                />
               </>
             }
           />
@@ -165,15 +183,24 @@ function App() {
             path="/"
             element={
               <>
-                <Navbar color="secondary" dark expand="xl" container="fluid">
+                <Navbar
+                  id="nav-bar"
+                  color="secondary"
+                  dark
+                  expand="xl"
+                  container="fluid"
+                >
                   <NavbarBrand href="/">
                     <h1>
                       e-<span style={{ color: "yellow" }}>Yellow</span> Pages
                     </h1>
                   </NavbarBrand>
                   <NavBarLinks
-                    onSignUp={() => setSignUpForm(!signUpForm)}
-                    showSignUp={signUpForm}
+                    // onSignUp={() => setSignUpForm(!signUpForm)}
+                    // showSignUp={signUpForm}
+                    isValidUser={isValidUser}
+                    setIsValidUser={setIsValidUser}
+                    setIsAdmin={setIsAdmin}
                   ></NavBarLinks>
                 </Navbar>
 
@@ -181,80 +208,82 @@ function App() {
                   {/* <Button className="add-user" color="dark" onClick={toggle}>
                     Add User
                   </Button> */}
-                  <div style={{ display: "flex", height: "3rem" }}>
-                    <FilterInput
-                      filterValue={filterValue}
-                      setFilterValue={setFilterValue}
-                      filterParameter={filterParameter}
-                      entries={entries}
-                      setEntries={setEntries}
-                      getEntries={getEntries}
-                    />
-                    <Dropdown
-                      isOpen={dropdownOpen}
-                      toggle={toggle3}
-                      direction="left"
-                    >
-                      {/* <DropdownMenu> */}
-                      <DropdownToggle
-                        caret
-                        style={{ height: "3rem" }}
-                      ></DropdownToggle>
-                      <DropdownMenu>
-                        <DropdownItem
-                          onClick={() => {
-                            // document.getElementById(
-                            //   "search-yellow-pages"
-                            // ).placeholder = "No Filter";
-                            setFilterParameter({
-                              "No Filter": true,
-                              "Filter By Name": false,
-                              "Filter By Phone": false,
-                              "Filter By Address": false,
-                            });
-                          }}
-                        >
-                          No Filter
-                        </DropdownItem>
-                        <DropdownItem
-                          onClick={() => {
-                            setFilterParameter({
-                              "No Filter": false,
-                              "Filter By Name": true,
-                              "Filter By Phone": false,
-                              "Filter By Address": false,
-                            });
-                          }}
-                        >
-                          Filter By Name
-                        </DropdownItem>
-                        <DropdownItem
-                          onClick={() => {
-                            setFilterParameter({
-                              "No Filter": false,
-                              "Filter By Name": false,
-                              "Filter By Phone": true,
-                              "Filter By Address": false,
-                            });
-                          }}
-                        >
-                          Filter By Phone
-                        </DropdownItem>
-                        <DropdownItem
-                          onClick={() => {
-                            setFilterParameter({
-                              "No Filter": false,
-                              "Filter By Name": false,
-                              "Filter By Phone": false,
-                              "Filter By Address": true,
-                            });
-                          }}
-                        >
-                          Filter By Address
-                        </DropdownItem>
-                      </DropdownMenu>
-                    </Dropdown>
-                  </div>
+                  {isValidUser && (
+                    <div style={{ display: "flex", height: "3rem" }}>
+                      <FilterInput
+                        filterValue={filterValue}
+                        setFilterValue={setFilterValue}
+                        filterParameter={filterParameter}
+                        entries={entries}
+                        setEntries={setEntries}
+                        getEntries={getEntries}
+                      />
+                      <Dropdown
+                        isOpen={dropdownOpen}
+                        toggle={toggle3}
+                        direction="left"
+                      >
+                        {/* <DropdownMenu> */}
+                        <DropdownToggle
+                          caret
+                          style={{ height: "3rem" }}
+                        ></DropdownToggle>
+                        <DropdownMenu>
+                          <DropdownItem
+                            onClick={() => {
+                              // document.getElementById(
+                              //   "search-yellow-pages"
+                              // ).placeholder = "No Filter";
+                              setFilterParameter({
+                                "No Filter": true,
+                                "Filter By Name": false,
+                                "Filter By Phone": false,
+                                "Filter By Address": false,
+                              });
+                            }}
+                          >
+                            No Filter
+                          </DropdownItem>
+                          <DropdownItem
+                            onClick={() => {
+                              setFilterParameter({
+                                "No Filter": false,
+                                "Filter By Name": true,
+                                "Filter By Phone": false,
+                                "Filter By Address": false,
+                              });
+                            }}
+                          >
+                            Filter By Name
+                          </DropdownItem>
+                          <DropdownItem
+                            onClick={() => {
+                              setFilterParameter({
+                                "No Filter": false,
+                                "Filter By Name": false,
+                                "Filter By Phone": true,
+                                "Filter By Address": false,
+                              });
+                            }}
+                          >
+                            Filter By Phone
+                          </DropdownItem>
+                          <DropdownItem
+                            onClick={() => {
+                              setFilterParameter({
+                                "No Filter": false,
+                                "Filter By Name": false,
+                                "Filter By Phone": false,
+                                "Filter By Address": true,
+                              });
+                            }}
+                          >
+                            Filter By Address
+                          </DropdownItem>
+                        </DropdownMenu>
+                      </Dropdown>
+                    </div>
+                  )}
                 </Container>
                 <br />
 
@@ -266,12 +295,19 @@ function App() {
                   fetchEntries={fetchEntries}
                   entries={entries}
                   setEntries={setEntries}
+                  isAdmin={isAdmin}
+                  isValidUser={isValidUser}
+                  handleDeleteMultiple={handleDeleteMultiple}
+                  selectedEntries={selectedEntries}
+                  setSelectedEntries={setSelectedEntries}
+                  handleCheckboxChange={handleCheckboxChange}
                 />
 
                 <Pagination
                   entriesPerPage={entriesPerPage}
                   totalEntries={entries.length}
                   paginate={paginate}
+                  isValidUser={isValidUser}
                 />
                 <Modal isOpen={editUser} toggle={toggle2}>
                   <ModalHeader toggle={toggle2}>

@@ -24,6 +24,7 @@ export async function handleNewUser(
       phone: formData.phone,
       address: formData.address,
       password: formData.password,
+      admin: false,
     };
     // const res = await fetch("http://localhost:5000/entries", {
     //   method: "POST",

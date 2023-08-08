@@ -1,6 +1,10 @@
 *{
   user-select: none;
 }
+#root{
+  min-height: 120vh;
+  background-color: rgba(260, 260, 260, 0.75);
+}
 
 body {
   margin: 0;
@@ -9,6 +13,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 120vh;
 }
 
 code {

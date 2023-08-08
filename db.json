@@ -5,224 +5,192 @@
       "name": "Mandalorian",
       "gender": "Male",
       "department": "Front End",
-      "projects": [
-        "Banking Application"
-      ],
+      "projects": ["Banking Application", "FinTech App"],
       "email": "mandalorian@gmail.com",
       "phone": "8476394857",
       "address": "Mandalore",
-      "password": ""
+      "password": "$2a$10$x6jCPFDpws3ByHzytaIQ0u2FZ.Ev2bzDYcMJoqtSpSVvkF6yGatIi",
+      "admin": false
     },
     {
       "id": "2",
       "name": "Anakin Skywalker",
       "gender": "Male",
       "department": "Front End",
-      "projects": [
-        "Banking Application"
-      ],
+      "projects": ["Banking Application"],
       "email": "anakin@gmail.com",
       "phone": "5873927483",
       "address": "Tatooine",
-      "password": ""
+      "password": "$2a$10$gzdotiWTaMFMG.mvOsfzSuKHtRUByUEBS6EJypul.6.Mw8cRj5tMe",
+      "admin": false
     },
     {
       "id": "3",
       "name": "Grogu",
       "gender": "Male",
       "department": "Front End",
-      "projects": [
-        "Banking Application"
-      ],
+      "projects": ["Banking Application"],
       "email": "grogu@gmail.com",
       "phone": "7987388402",
-      "address": "Jedi Temple, Coruscant",
-      "password": ""
+      "address": "Coruscant",
+      "password": "$2a$10$ksNKcQtBBkVb8LlApRaIdukDfHALO81LhybDQNrccPeW62I6qdO3S",
+      "admin": false
     },
     {
       "id": "4",
       "name": "Khal Drogo",
       "gender": "Other",
       "department": "Testing",
-      "projects": [
-        "Library Management App"
-      ],
+      "projects": ["Library Management App"],
       "email": "khal@gmail.com",
       "phone": "8675948763",
-      "address": "Dothraki Land",
-      "password": ""
+      "address": "Dothrak",
+      "password": "$2a$10$sADc6WEa2yg6XAslLR/41eITebJPCGu2HLja19Iz39unMNDPswyGW",
+      "admin": false
     },
     {
       "id": "5",
       "name": "Aquaman",
       "gender": "Male",
       "department": "Back End",
-      "projects": [
-        "Library Management App"
-      ],
+      "projects": ["Library Management App"],
       "email": "arthurcurry@gmail.com",
       "phone": "8928573897",
       "address": "Atlantis",
-      "password": ""
+      "password": "$2a$10$5SCI7wCr.j7EQjlEAtCPK.zMxIaisiqk.5vEVPp5CGeDRUqQ/TL9G",
+      "admin": false
     },
     {
       "id": "6",
       "name": "Gandalf",
       "gender": "Male",
       "department": "Back End",
-      "projects": [
-        "Library Management App"
-      ],
+      "projects": ["Library Management App"],
       "email": "gandalf@yahoomail.com",
       "phone": "8739275937",
-      "address": "Gardens of Lorien",
-      "password": ""
+      "address": "Lorien",
+      "password": "$2a$10$NnPeMeGPopOFS4EOfdNjbu70VLjOqJyoQs2w3ifdtYrb6WoTynJE6",
+      "admin": false
     },
     {
       "id": "7",
       "name": "John Wick",
       "gender": "Male",
       "department": "UI/UX",
-      "projects": [
-        "EdTech App"
-      ],
+      "projects": ["EdTech App"],
       "email": "wickwick@gmail.com",
       "phone": "8579302857",
-      "address": "New York City, USA",
-      "password": ""
+      "address": "NewYork",
+      "password": "$2a$10$25CudUM.onh/AePub1urCOcEe6Vaa.1yJcyOmvaHmcANAuzm9nTMO",
+      "admin": false
     },
     {
       "id": "8",
       "name": "Jason Bourne",
       "gender": "Male",
       "department": "UI/UX",
-      "projects": [
-        "EdTech App"
-      ],
+      "projects": ["EdTech App"],
       "email": "bourneultimatum@gmail.com",
       "phone": "7849357694",
-      "address": "CIA headquarters, USA",
-      "password": ""
+      "address": "CIA",
+      "password": "$2a$10$66LZ8CsOGqL/wPz69RqS7ufN/lmnzSJuYqZ055NsA934rUuI/bL9K",
+      "admin": false
     },
     {
       "id": "9",
       "name": "Bruce Wayne",
       "gender": "Male",
       "department": "UI/UX",
-      "projects": [
-        "EdTech App"
-      ],
+      "projects": ["EdTech App"],
       "email": "iambatman@gmail.com",
       "phone": "4857685949",
       "address": "Gotham",
-      "password": ""
+      "password": "$2a$10$GIwpC43CpgcqxGiI45zYmOyR6eHN6cbX7wig.07MMOVjb5CVoKEYO",
+      "admin": false
     },
     {
       "id": "10",
       "name": "Thor",
       "gender": "Male",
       "department": "Dev Ops",
-      "projects": [
-        "FinTech App"
-      ],
+      "projects": ["FinTech App"],
       "email": "bringmethanos@gmail.com",
       "phone": "8888888888",
       "address": "Asgard",
-      "password": ""
+      "password": "$2a$10$xIMLFX.lnXlJI6RQjEuXk.1QUTCXQJ2lwzADE999CR26mkP4mCuou",
+      "admin": false
     },
     {
       "id": "11",
       "name": "Tony Stark",
       "gender": "Male",
       "department": "Dev Ops",
-      "projects": [
-        "FinTech App"
-      ],
+      "projects": ["FinTech App"],
       "email": "iamironman@gmail.com",
       "phone": "7878787878",
-      "address": "Stark Tower, New York",
-      "password": ""
+      "address": "StarkTower",
+      "password": "$2a$10$9.5Oveo64tZPsFFlVtFIMONFnG9epiKJnV.kIvZFtw0SjHs9.pMJa",
+      "admin": false
     },
     {
       "id": "UJeAXqKn",
       "name": "Dr. Stephen Strange",
       "gender": "Male",
       "department": "Dev Ops",
-      "projects": [
-        "FinTech App"
-      ],
+      "projects": ["FinTech App"],
       "email": "timestone@gmail.com",
       "phone": "7654567654",
-      "address": "London, UK",
-      "password": ""
+      "address": "London",
+      "password": "$2a$10$amgOUl6VXyUuP86Q57bKgudk/viEo8sc.1Y8GZr9R6R.NEU0VpNLm",
+      "admin": false
     },
     {
       "id": "KZtZLcMp",
       "name": "Nick Fury",
       "gender": "Male",
       "department": "Testing",
-      "projects": [
-        "E-Commerce App"
-      ],
+      "projects": ["E-Commerce App"],
       "email": "avengersinitiative@gmail.com",
       "phone": "2140007654",
-      "address": "Location Unknown",
-      "password": ""
+      "address": "LocationUnknown",
+      "password": "$2a$10$eDx7oMgDiv6rFWGqvhnV/ux4XoSJx9zcUN5ngP3q59Gba2Pr9Yeom",
+      "admin": false
     },
     {
       "id": "vbhHaknm",
       "name": "Natasha Romanoff",
       "gender": "Female",
       "department": "Back End",
-      "projects": [
-        "FinTech App",
-        "E-Commerce App"
-      ],
+      "projects": ["FinTech App", "E-Commerce App"],
       "email": "soulstone@gmail.com",
       "phone": "4638945038",
-      "address": "Stalingrad, Russia",
-      "password": ""
+      "address": "Stalingrad",
+      "password": "$2a$10$1WWfv8ygpbaT.4Dy.d84SurvlxEnCCw3C7/Ps2NSACuImdWdno0ja",
+      "admin": false
     },
     {
       "id": "RUBGJZd1",
       "name": "Bruce Banner",
       "gender": "Male",
       "department": "Testing",
-      "projects": [
-        "E-Commerce App"
-      ],
+      "projects": ["E-Commerce App"],
       "email": "bringmeloki@gmail.com",
       "phone": "9119119110",
-      "address": "Ohio, USA",
-      "password": ""
-    },
-    {
-      "id": "DxiFzCr2",
-      "name": "Shiva",
-      "gender": "Male",
-      "department": "Front End",
-      "projects": [
-        "Library Management App"
-      ],
-      "email": "baghelshivank97@gmail.com",
-      "phone": "4444444",
-      "address": "ggggggggggggggggggggggg",
-      "password": "$2a$10$ulshDrBoSFHqhSh1HXGyleMBNQaIN5AV23zg01cop90.gAYCIbsne"
+      "address": "Ohio",
+      "password": "$2a$10$PhprLShLW3OmIdu9.xsjW.E3GPK.4sblC6uICC6G1LPxJxlvYhAWu",
+      "admin": false
     },
     {
       "id": "IMIwnsbW",
       "name": "Shivank Singh Baghel",
       "gender": "Male",
       "department": "Back End",
-      "projects": [
-        "E-Commerce App",
-        "FinTech App",
-        "EdTech App"
-      ],
+      "projects": ["E-Commerce App", "FinTech App", "EdTech App"],
       "email": "baghelshivank97@gmail.com",
       "phone": "22222222",
-      "address": "ddddddddddddd",
-      "password": "$2a$10$Yfqzy.UNokw59f.gzSPLzuAazARAa//XOf8vzKy2PMtkY71TYbpTC"
+      "address": "Didaundh",
+      "password": "$2a$10$Ebk85v8FK0WpL.S/eXgtmebll2N/mSZXjiuh2jPgjMLUZBJRAqKR2",
+      "admin": true
     }
   ]
 }

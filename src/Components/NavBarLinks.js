@@ -1,15 +1,29 @@
 import { Link } from "react-router-dom";
 
-const NavBarLinks = (onSignUp, showSignUp) => {
+const NavBarLinks = ({ isValidUser, setIsValidUser, setIsAdmin }) => {
   return (
     <div>
       <ul id="header-nav-links">
         <li>
           <Link to="/">Home</Link>
         </li>
-        <li>
-          <Link to="/sign-in">Sign in</Link>
-        </li>
+        {isValidUser ? (
+          <li>
+            <Link
+              to="/"
+              onClick={() => {
+                setIsValidUser(false);
+                setIsAdmin(false);
+              }}
+            >
+              Sign Out
+            </Link>
+          </li>
+        ) : (
+          <li>
+            <Link to="/sign-in">Sign in</Link>
+          </li>
+        )}
         <li>
           <Link
             to="/sign-up"

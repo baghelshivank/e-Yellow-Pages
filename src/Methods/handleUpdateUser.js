@@ -26,6 +26,7 @@ export async function handleUpdateUser(
     phone: toBeUpdated.phone,
     address: toBeUpdated.address,
     password: toBeUpdated.password,
+    admin: false,
   };
   // await fetch(`http://localhost:5000/entries/${updateUser.id}`, {
   //   method: "PUT",
@@ -47,6 +48,7 @@ export async function handleUpdateUser(
     phone: "",
     address: "",
     password: "",
+    admin: false,
   });
 
   setEditUser(false);

@@ -55,7 +55,7 @@ const FilterInput = ({
         placeholder={`${Object.keys(filterParameter).find(
           (key) => filterParameter[key]
         )}`}
-        autocomplete="off"
+        // autocomplete="off"
         onChange={(e) => setFilterValue(e.target.value)}
       />
     </div>

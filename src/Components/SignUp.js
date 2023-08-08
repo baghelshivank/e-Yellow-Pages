@@ -4,6 +4,7 @@ import { handleNewUser } from "../Methods/handleNewUser";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 // import handleSignUp from "../Methods/handleSignUp";
 import { Link } from "react-router-dom";
+import "../Assets/App.css";
 
 const SignUp = ({ formData, setFormData, entries, setEntries }) => {
   const handleChange = (e) => {
@@ -27,7 +28,7 @@ const SignUp = ({ formData, setFormData, entries, setEntries }) => {
 
     // Now, you can send the hashed password to the server for sign-up or registration
     // For demonstration purposes, we will just log the hashed password
-    console.log("Hashed Password:", hashedPassword);
+    // console.log("Hashed Password:", hashedPassword);
     formData.password = hashedPassword;
     await handleNewUser(formData, entries, setEntries);
 
@@ -42,20 +43,21 @@ const SignUp = ({ formData, setFormData, entries, setEntries }) => {
       phone: "",
       address: "",
       password: "",
+      admin: false,
     });
     // window.location.replace("http://www.w3schools.com");
     window.location.replace("http://localhost:3000/");
   };
 
   return (
-    <div>
-      <Link to="/">
-        <Button type="button" color="secondary">
-          &lt;---
-        </Button>
-      </Link>
+    <div id="sign-up-form-wrapper">
+      <div id="back-btn-wrapper">
+        <Link to="/">
+          <i class="fa-solid fa-left-long back-btn"></i>
+        </Link>
+      </div>
 
-      <Form>
+      <Form id="sign-up-form">
         <FormGroup>
           <Label for="suName">Name</Label>
           <Input
@@ -225,9 +227,11 @@ const SignUp = ({ formData, setFormData, entries, setEntries }) => {
           />
         </FormGroup>
       </Form>
-      <Button type="submit" color="secondary" onClick={() => handleSubmit()}>
-        Sign Up
-      </Button>
+      <div id="sign-up-btn-wrapper">
+        <button id="sign-up-btn" type="submit" onClick={() => handleSubmit()}>
+          Sign Up
+        </button>
+      </div>
     </div>
   );
 };
