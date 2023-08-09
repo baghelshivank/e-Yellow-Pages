@@ -27,7 +27,7 @@ const SignIn = ({ setIsAdmin, setIsValidUser }) => {
       {!signInToggle && (
         <div id="back-btn-wrapper">
           <Link to="/">
-            <i class="fa-solid fa-left-long back-btn"></i>
+            <i className="fa-solid fa-left-long back-btn"></i>
           </Link>
         </div>
       )}

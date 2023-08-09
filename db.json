@@ -5,7 +5,10 @@
       "name": "Mandalorian",
       "gender": "Male",
       "department": "Front End",
-      "projects": ["Banking Application", "FinTech App"],
+      "projects": [
+        "Banking Application",
+        "FinTech App"
+      ],
       "email": "mandalorian@gmail.com",
       "phone": "8476394857",
       "address": "Mandalore",
@@ -17,7 +20,9 @@
       "name": "Anakin Skywalker",
       "gender": "Male",
       "department": "Front End",
-      "projects": ["Banking Application"],
+      "projects": [
+        "Banking Application"
+      ],
       "email": "anakin@gmail.com",
       "phone": "5873927483",
       "address": "Tatooine",
@@ -29,7 +34,9 @@
       "name": "Grogu",
       "gender": "Male",
       "department": "Front End",
-      "projects": ["Banking Application"],
+      "projects": [
+        "Banking Application"
+      ],
       "email": "grogu@gmail.com",
       "phone": "7987388402",
       "address": "Coruscant",
@@ -41,7 +48,9 @@
       "name": "Khal Drogo",
       "gender": "Other",
       "department": "Testing",
-      "projects": ["Library Management App"],
+      "projects": [
+        "Library Management App"
+      ],
       "email": "khal@gmail.com",
       "phone": "8675948763",
       "address": "Dothrak",
@@ -53,7 +62,9 @@
       "name": "Aquaman",
       "gender": "Male",
       "department": "Back End",
-      "projects": ["Library Management App"],
+      "projects": [
+        "Library Management App"
+      ],
       "email": "arthurcurry@gmail.com",
       "phone": "8928573897",
       "address": "Atlantis",
@@ -65,7 +76,9 @@
       "name": "Gandalf",
       "gender": "Male",
       "department": "Back End",
-      "projects": ["Library Management App"],
+      "projects": [
+        "Library Management App"
+      ],
       "email": "gandalf@yahoomail.com",
       "phone": "8739275937",
       "address": "Lorien",
@@ -77,7 +90,9 @@
       "name": "John Wick",
       "gender": "Male",
       "department": "UI/UX",
-      "projects": ["EdTech App"],
+      "projects": [
+        "EdTech App"
+      ],
       "email": "wickwick@gmail.com",
       "phone": "8579302857",
       "address": "NewYork",
@@ -89,7 +104,9 @@
       "name": "Jason Bourne",
       "gender": "Male",
       "department": "UI/UX",
-      "projects": ["EdTech App"],
+      "projects": [
+        "EdTech App"
+      ],
       "email": "bourneultimatum@gmail.com",
       "phone": "7849357694",
       "address": "CIA",
@@ -101,7 +118,9 @@
       "name": "Bruce Wayne",
       "gender": "Male",
       "department": "UI/UX",
-      "projects": ["EdTech App"],
+      "projects": [
+        "EdTech App"
+      ],
       "email": "iambatman@gmail.com",
       "phone": "4857685949",
       "address": "Gotham",
@@ -113,7 +132,9 @@
       "name": "Thor",
       "gender": "Male",
       "department": "Dev Ops",
-      "projects": ["FinTech App"],
+      "projects": [
+        "FinTech App"
+      ],
       "email": "bringmethanos@gmail.com",
       "phone": "8888888888",
       "address": "Asgard",
@@ -125,7 +146,9 @@
       "name": "Tony Stark",
       "gender": "Male",
       "department": "Dev Ops",
-      "projects": ["FinTech App"],
+      "projects": [
+        "FinTech App"
+      ],
       "email": "iamironman@gmail.com",
       "phone": "7878787878",
       "address": "StarkTower",
@@ -137,7 +160,9 @@
       "name": "Dr. Stephen Strange",
       "gender": "Male",
       "department": "Dev Ops",
-      "projects": ["FinTech App"],
+      "projects": [
+        "FinTech App"
+      ],
       "email": "timestone@gmail.com",
       "phone": "7654567654",
       "address": "London",
@@ -149,7 +174,9 @@
       "name": "Nick Fury",
       "gender": "Male",
       "department": "Testing",
-      "projects": ["E-Commerce App"],
+      "projects": [
+        "E-Commerce App"
+      ],
       "email": "avengersinitiative@gmail.com",
       "phone": "2140007654",
       "address": "LocationUnknown",
@@ -161,7 +188,10 @@
       "name": "Natasha Romanoff",
       "gender": "Female",
       "department": "Back End",
-      "projects": ["FinTech App", "E-Commerce App"],
+      "projects": [
+        "FinTech App",
+        "E-Commerce App"
+      ],
       "email": "soulstone@gmail.com",
       "phone": "4638945038",
       "address": "Stalingrad",
@@ -173,7 +203,9 @@
       "name": "Bruce Banner",
       "gender": "Male",
       "department": "Testing",
-      "projects": ["E-Commerce App"],
+      "projects": [
+        "E-Commerce App"
+      ],
       "email": "bringmeloki@gmail.com",
       "phone": "9119119110",
       "address": "Ohio",
@@ -185,12 +217,31 @@
       "name": "Shivank Singh Baghel",
       "gender": "Male",
       "department": "Back End",
-      "projects": ["E-Commerce App", "FinTech App", "EdTech App"],
+      "projects": [
+        "E-Commerce App",
+        "FinTech App",
+        "EdTech App"
+      ],
       "email": "baghelshivank97@gmail.com",
       "phone": "22222222",
       "address": "Didaundh",
       "password": "$2a$10$Ebk85v8FK0WpL.S/eXgtmebll2N/mSZXjiuh2jPgjMLUZBJRAqKR2",
       "admin": true
+    },
+    {
+      "id": "uuq5u5x4",
+      "name": "Shivank Singh",
+      "gender": "Male",
+      "department": "UI/UX",
+      "projects": [
+        "Banking Application",
+        "Library Management App"
+      ],
+      "email": "baghelshivank97@gmail.com",
+      "phone": "7898789877",
+      "address": "ffffffffffffff",
+      "password": "$2a$10$gxGA.RZN67J44g1EhhNoh.At9sLG5W5Ulbw7rirl7QQSSzk6IWEFq",
+      "admin": false
     }
   ]
 }

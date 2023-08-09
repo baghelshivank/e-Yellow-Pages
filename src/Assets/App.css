@@ -203,7 +203,10 @@ body{
 
 
 #sign-up-form{
-    padding: 1rem 10rem;
+    margin: 4rem 8rem 0rem 8rem;
+    border: 2px solid gray;
+    border-left: none;
+    padding: 2rem 4rem;
 }
 
 #sign-up-btn-wrapper{
