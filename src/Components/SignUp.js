@@ -49,8 +49,8 @@ const SignUp = ({ formData, setFormData, entries, setEntries }) => {
     return passwordPattern.test(password);
   };
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = async (e) => {
+    await setFormData({ ...formData, [e.target.name]: e.target.value });
     if (e.target.name === "name") {
       setFormValid((prevState) => ({
         ...prevState,
